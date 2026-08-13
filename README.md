@@ -1,16 +1,36 @@
-# React + Vite
+# Monitoreo de Sensores IoT en Tiempo Real - UTEQ
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Este proyecto es una aplicación web telemática desarrollada con **React** y **Firebase Realtime Database (RTDB)**. Su objetivo es visualizar en tiempo real las mediciones ambientales de la red de sensores ubicados en el Campus La María de la Universidad Técnica Estatal de Quevedo (UTEQ).
 
-Currently, two official plugins are available:
+## Características Principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+*   **Monitoreo en Tiempo Real:** Las tarjetas de telemetría (Temperatura, Humedad, Presión Atmosférica) y el historial de mediciones se actualizan instantáneamente mediante el SDK de Firebase sin necesidad de recargar la página.
+*   **Enrutamiento Dinámico:** Implementación de navegación jerárquica utilizando `react-router-dom` para transitar fluidamente entre la vista global de ubicaciones y el Dashboard específico de cada nodo.
+*   **Arquitectura Modular:** Uso de Custom Hooks (`useSensorData`) para separar la lógica de conexión y suscripción a la base de datos de los componentes visuales de la interfaz.
 
-## React Compiler
+## Tecnologías Utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*   **Frontend:** React 18, Vite
+*   **Enrutamiento:** React Router DOM
+*   **Base de Datos (BaaS):** Firebase Realtime Database
+*   **Estilos:** CSS3 Nativo (Diseño Responsivo)
 
-## Expanding the Oxlint configuration
+## 📂 Estructura del Proyecto
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+La arquitectura del código sigue estrictamente el patrón modular de componentes y vistas:
+
+```text
+src/
+├── components/
+│   ├── Navbar.jsx       # Barra de navegación principal
+│   └── SensorCard.jsx   # Tarjeta reutilizable para métricas ambientales
+├── hooks/
+│   └── useSensorData.js # Custom hook para consultar los tres nodos de RTDB
+├── pages/
+│   ├── Dashboard.jsx    # Panel dinámico del sensor seleccionado
+│   └── Ubicaciones.jsx  # Cuadrícula con todos los sensores de la red
+├── services/
+│   └── firebase.js      # Configuración e inicialización del SDK
+├── App.jsx              # Gestor de rutas de la aplicación
+├── main.jsx             # Punto de entrada de React
+└── styles.css           # Hoja de estilos de la interfaz
